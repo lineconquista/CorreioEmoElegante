@@ -1,8 +1,9 @@
 import express from 'express';
 import * as error from './middlewares/error/handler.js';
 import bodyParser from 'body-parser';
-import routes from './routes/index.js';
+import routes from './routes.js';
 import cors from 'cors';
+import path  from 'path';
 
 function listen() {
     app.listen(port, () => {
@@ -24,6 +25,9 @@ function setMiddlewares() {
   app.use((err, req, res, next) => {
     error.handler(err, res);
   });
+  app.get('/', (req, res) => {
+    res.sendFile(path.join(path.resolve(path.dirname('')) + '/src/index.html'))
+  })
 }
 
 const app = express();

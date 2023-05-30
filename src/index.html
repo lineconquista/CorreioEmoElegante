@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Correio Emo Elegante</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <form id="messageForm" >
+        <input type="text" id="message" name="message" placeholder="alguma coisa!" maxlength="255"></input>
+        <button type="button" id="sendMessageButton" value="">Enviar</button>
+    </form>
+    <div>
+      <h1>Messages</h1>
+      <ul id="messages"></ul>
+    </div>
+  
+
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    const url = "http://localhost:8080/messages"
+
+    function sendMessage(message){
+      $.post({
+          url: url,
+          data: {
+            message
+          }, 
+          function(data, status){
+           window.location.href("http://localhost:8080")
+          }
+        })
+    }
+
+    $(document).ready(function(){
+
+      $.ajax({ url: "http://localhost:8080/messages",
+        context: document.body,
+        success: function(data){
+           data.messages.map((d) => {
+            return $("#messages").append(`
+            <ol> 
+              <div> 
+                <div id="content"> "${d.message}" </div> 
+                <div id="date"> "${d.date}" </div> 
+                <div id="like">
+                  <button id="likesButton" name= "${d.id}" type="button"> ❤️ </button>
+                  <p id="likesCount">${d.like}</p> 
+              </div>
+            </ol>`)
+           })
+        }
+      });
+
+      $("#likesButton").click(function (e) {
+        console.log(e)
+        //nao funciona esse demonho
+          e.preventDefault()
+        })
+      
+
+      $("#message").keydown(function (e) {
+        const message = $('#message').val()
+        if (e.keyCode==13){
+          if(message != ""){
+            sendMessage(message)
+            $('#message').val("")
+          }
+          e.preventDefault()
+        }
+      })
+
+      $("#sendMessageButton").click(function () {
+        const message = $('#message').val()
+        if(message != ""){
+          sendMessage(message)
+          $('#message').val("")
+        }
+      });
+
+
+
+    })
+  </script>
+</html>
