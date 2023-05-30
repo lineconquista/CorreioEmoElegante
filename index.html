@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Correio Emo Elegante</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <form id="messageForm" >
+        <input type="text" id="message" name="message" placeholder="alguma coisa!" maxlength="255"></input>
+        <button type="button" id="sendMessageButton" value="">Enviar</button>
+    </form>
+    <div>
+      <h1>Messages</h1>
+      <button type="button" id="refreshButton" value="">Refresh</button>
+      <ul id="messages"></ul>
+    </div>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript">
+
+    const url = "http://localhost:8080/messages"
+
+    function sendMessage(message){
+      $.post({
+          url: url,
+          data: {
+            message
+          }, 
+          success: function(){
+             location.reload()
+          }
+        })
+    }
+
+    function updateLike(id){
+      $.ajax({
+          url: url,
+          type: 'PUT',
+          data: {
+            id
+          },
+          success: function(){
+            location.reload()
+          }
+        })
+    }
+
+    $(document).ready(function(){
+
+      $.ajax({ url: "http://localhost:8080/messages",
+        context: document.body,
+        success: function(data){
+           data.messages.map((d) => {
+            return $("#messages").append(`
+            <ol> 
+              <div> 
+                <div id="content"> "${d.message}" </div> 
+                <div id="date"> "${d.date}" </div> 
+                <div id="like">
+                  <button class="likeButton" id="${d.id}" value="" type="button"> ❤️ </button>
+                  <p id="likeCount">${d.like}</p> 
+              </div>
+            </ol>
+           `)
+           })
+
+           $(".likeButton").on('click', function (e) {
+            updateLike(this.id)
+           })
+        }
+      });
+
+      $("#message").keydown(function (e) {
+        const message = $('#message').val()
+        if (e.keyCode==13){
+          if(message != ""){
+            sendMessage(message)
+            $('#message').val("")
+          }
+          e.preventDefault()
+        }
+      })
+
+      $("#sendMessageButton").click(function () {
+        const message = $('#message').val()
+        if(message != ""){
+          sendMessage(message)
+          $('#message').val("")
+        }
+      });
+
+      $("#refreshButton").click(function () {
+        location.reload()
+      });
+    })
+  </script>
+</html>
