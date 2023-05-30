@@ -26,7 +26,7 @@ function setMiddlewares() {
     error.handler(err, res);
   });
   app.get('/', (req, res) => {
-    res.sendFile(path.join(path.resolve(path.dirname('')) + '/src/index.html'))
+    res.sendFile(path.join(path.resolve(path.dirname('')) + '/index.html'))
   })
 }
 

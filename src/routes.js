@@ -7,7 +7,6 @@ const routes = Router();
 
 async function setMessage(req, res, next) {
     try {
-      console.log(req.body)
       const { message } = req.body
   
       const data = [{
