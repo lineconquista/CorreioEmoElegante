@@ -20,6 +20,7 @@
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript">
+
     const url = "http://localhost:8080/messages"
 
     function sendMessage(message){
@@ -28,8 +29,21 @@
           data: {
             message
           }, 
-          function(data, status){
-           window.location.href("http://localhost:8080")
+          success: function(){
+             location.reload()
+          }
+        })
+    }
+
+    function updateLike(id){
+      $.ajax({
+          url: url,
+          type: 'PUT',
+          data: {
+            id
+          },
+          success: function(){
+            location.reload()
           }
         })
     }
@@ -46,20 +60,18 @@
                 <div id="content"> "${d.message}" </div> 
                 <div id="date"> "${d.date}" </div> 
                 <div id="like">
-                  <button id="likesButton" name= "${d.id}" type="button"> ❤️ </button>
-                  <p id="likesCount">${d.like}</p> 
+                  <button class="likeButton" id="${d.id}" value="" type="button"> ❤️ </button>
+                  <p id="likeCount">${d.like}</p> 
               </div>
-            </ol>`)
+            </ol>
+           `)
+           })
+
+           $(".likeButton").on('click', function (e) {
+            updateLike(this.id)
            })
         }
       });
-
-      $("#likesButton").click(function (e) {
-        console.log(e)
-        //nao funciona esse demonho
-          e.preventDefault()
-        })
-      
 
       $("#message").keydown(function (e) {
         const message = $('#message').val()
@@ -79,9 +91,6 @@
           $('#message').val("")
         }
       });
-
-
-
     })
   </script>
 </html>

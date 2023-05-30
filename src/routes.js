@@ -25,7 +25,7 @@ async function setMessage(req, res, next) {
         }, 
       )
   
-      return res.status(200).json();
+      return res.status(200).json({});
   
     } catch (error) {
         next(error);
@@ -79,7 +79,7 @@ async function updatedMessageLikes(req, res, next) {
       }, 
     )
 
-    return res.status(200).json();
+    return res.status(200).json({});
 
   } catch (error) {
       next(error);
