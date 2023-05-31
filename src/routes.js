@@ -51,5 +51,8 @@ async function updatedMessageLikes(req, res, next) {
 routes.post('/messages',  setMessage);
 routes.get('/messages',  listMessages);
 routes.put('/messages',  updatedMessageLikes);
+routes.get('/health', (req, res) => {
+  res.sendStatus(200);
+});
 
 export default routes;
