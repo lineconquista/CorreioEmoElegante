@@ -20,11 +20,11 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript">
 
-    const url = "https://lineconquista.github.io/CorreioEmoElegante/messages"
+    const url = "https://correioemoelegante-gztk.onrender.com/messages"
 
     function sendMessage(message){
       $.post({
-          url: url,
+          url,
           data: {
             message
           }, 
@@ -52,7 +52,7 @@
       $.ajax({ url,
         context: document.body,
         success: function(data){
-           data.messages.map((d) => {
+           data.messages?.map((d) => {
             return $("#messages").append(`
             <ol> 
               <div> 
