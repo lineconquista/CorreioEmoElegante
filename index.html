@@ -51,6 +51,7 @@
       $.ajax({ url,
         context: document.body,
         success: function(data){
+           const ids = JSON.parse(window.localStorage.getItem('ids')) || []
            data.messages?.map((d) => {
             return $("#messages").append(`
             <ol> 
@@ -58,7 +59,7 @@
                 <div id="content"> "${d.message}" </div> 
                 <div id="date"> "${d.date}" </div> 
                 <div id="like">
-                  <button class="likeButton" id="${d.id}" value="" type="button"> ❤️ </button>
+                  <button class="likeButton" id="${d.id}" ${ids.find((res)=> res == d.id) ? "disabled" : ""} value="" type="button"> ❤️ </button>
                   <p id="likeCount">${d.like}</p> 
               </div>
             </ol>
