@@ -8,7 +8,7 @@ const messages = []
 async function setMessage(req, res, next) {
     try {
       const { message } = req.body
-      lenMessages++
+      
 
       const data = {
         id: lenMessages,
@@ -18,6 +18,7 @@ async function setMessage(req, res, next) {
       }
 
       messages.push(data)
+      lenMessages++
       
       return res.status(200).json({});
   
@@ -38,7 +39,7 @@ async function listMessages(req, res, next) {
 async function updatedMessageLikes(req, res, next) {
   try {
     const { id } = req.body
-
+    console.log(id)
     messages[id].like = Number(messages[id].like) + 1
     return res.status(200).json({});
 
