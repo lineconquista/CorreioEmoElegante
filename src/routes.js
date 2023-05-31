@@ -3,7 +3,7 @@ import { Router } from 'express';
 const routes = Router();
 
 let lenMessages = 0
-const messages = [{id: lenMessages, date: new Date(), message: "teste1", like: 0}]
+const messages = []
 
 async function setMessage(req, res, next) {
     try {
