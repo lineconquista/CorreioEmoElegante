@@ -9,8 +9,8 @@
   "main": "src/index",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --inspect=0.0.0.0:9229 -L src/index.js",
-    "start": "node src/index.js"
+    "dev": "nodemon --inspect=0.0.0.0:9229 -L index.js",
+    "start": "node index.js"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
