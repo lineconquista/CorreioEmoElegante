@@ -3,25 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Correio Emo Elegante</title>
+    <title> Correio Emo Elegante </title>
+    <link rel="stylesheet" href="style/style.css">
   </head>
+
   <body>
-    <div id="root"></div>
-    <form id="messageForm" >
-        <input type="text" id="message" name="message" placeholder="alguma coisa!" maxlength="255"></input>
-        <button type="button" id="sendMessageButton" value="">Enviar</button>
-    </form>
-    <div>
-      <h1>Messages</h1>
-      <button type="button" id="refreshButton" value="">Refresh</button>
-      <ul id="messages"></ul>
+    <div id="root">
+      <form id="messageForm" class="index__form">
+        <input id="ademo-toggler" type="image" src="static/ademo.png" class="index__form-icon" alt="ademo">
+        <textarea id="message" class="index__form-input" form="messageForm" name="message" placeholder="Mande seu recado anonimamente..." rows="4" maxlength="285" type="text"></textarea>
+        <input id="sendMessageButton" type="image" src="static/send.png" class="index__form-button" alt="send">
+      </form>
+
+      <h1 class="index__title">Recadinhos:</h1>
+      
+      <ul id="messages" class="index__message-list">
+        <!-- -->
+      </ul>
+
+      <!-- <input id="refreshButton" type="image" src="static/refresh.png" class="index__refresh" alt="refresh"> -->
     </div>
   </body>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script type="text/javascript">
 
-    const url = "https://correioemoelegante.herokuapp.com/messages"
-    //const url = "http://localhost:8080/messages"
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  
+  <script type="text/javascript">
+    // const url = "https://correioemoelegante.herokuapp.com/messages"
+    const url = "http://localhost:8080/messages"
     function sendMessage(message){
       $.post({
           url,
@@ -59,19 +67,19 @@
 
            data.messages?.map((d) => {
             return $("#messages").append(`
-            <ol> 
-              <div> 
-                <div id="content"> "${d.message}" </div> 
-                <div id="date"> "${d.date}" </div> 
-                <div id="like">
-                  <button class="likeButton" id="${d.id}" ${ids.find((res)=> res == d.id) ? "disabled" : ""} value="" type="button"> ❤️ </button>
-                  <p id="likeCount">${d.like}</p> 
+            <ol class="index__message-item">
+              <div id="content" class="index__message-item-content">
+                <p>"${d.message}"</p>
+                <span>"${d.date}"</span>
+              </div>
+              <input id="${d.id}" type="image" src="static/refresh.png" class="index__message-item-button" alt="like" ${ids.find((res)=> res == d.id) ? "disabled" : ""}>
+              <p id="likeCount" class="index__message-item-text">${d.like}</p> 
               </div>
             </ol>
            `)
            })
 
-          $(".likeButton").on('click', function (e) {
+          $(".index__message-item-button").on('click', function (e) {
             const id =  this.id
             const ids = JSON.parse(window.localStorage.getItem('ids')) || []
             if (!ids.find((res)=> res == id)) {
@@ -106,5 +114,33 @@
         location.reload()
       });
     })
+  </script>
+  
+  <script type="text/javascript">
+    // functions
+    const enableAdemode = () => {
+      document.body.classList.add('ademo');
+      localStorage.setItem('ademo', 'enabled');
+    };
+
+    const disableAdemode = () => {
+      document.body.classList.remove('ademo');
+      localStorage.setItem('ademo', 'disabled');
+    };
+
+    // get localstorage
+    let ademode = localStorage.getItem("ademo");
+
+    if(ademode === "enabled"){
+      enableAdemode();
+    };
+
+    // add button toggler
+    const ademoToggler = document.querySelector("#ademo-toggler");
+
+    ademoToggler.addEventListener("click", () => {
+      ademode = localStorage.getItem("ademo");
+      ademode === 'enabled' ? disableAdemode() : enableAdemode();
+    });
   </script>
 </html>
