@@ -9,9 +9,7 @@
 html,
 body {
   background-color: #00070E;
-  /* display: flex; */
   height: 100%;
-  /* justify-content: center; */
   margin: 0;
   width: 100%;
 }
@@ -25,46 +23,62 @@ body {
   width: calc(100% - 32px);
 }
 
+button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+svg {
+  fill: currentColor;
+  height: 100%;
+  width: 100%;
+}
+
 /* ------------------------------------------- */
-/* HEADER (FORM) */
-.index__form {
+/* HEADER */
+.index__header {
   align-items: center;
-  column-gap: 16px;
   display: flex;
   flex: 0 1 auto;
-  flex-flow: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* ------------------------------------------- */
+/* FORM */
+.index__form {
+  flex: 0 1 auto;
   height: auto;
   margin: 24px 0 0;
   width: 100%;
 }
 
-.index__form-button,
-.index__form-icon {
-  cursor: pointer;
-  flex: 0 1 auto;
-  height: 48px;
-  width: 48px;
+.index__form-container {
+  align-items: center;
+  border-color: white;
+  border-radius: 12px;
+  border-style: solid;
+  border-width: 1px;
+  column-gap: 8px;
+  display: flex;
+  flex-flow: row;
+  padding: 8px 12px;
+}
+
+.index__form-button {
+  color: white;
+  height: 28px;
+  width: 28px;
 }
 
 .index__form-input {
-  border-radius: 20px;
-  border-style: solid;
-  border-width: 1px;
+  border: none;
+  background-color: transparent;
+  color: white;
   flex: 1 1 auto;
-  height: auto;
-  padding: 8px 12px;
   resize: none;
-  width: auto;
 }
-
-/* ------------------------------------------- */
-/* REFRESH BUTTON */
-/* .index__refresh {
-  cursor: pointer;
-  height: 32px;
-  margin: 48px 0 0;
-  width: 32px;
-} */
 
 /* ------------------------------------------- */
 /* TITLE */
@@ -72,34 +86,63 @@ body {
   flex: 0 1 auto;
   margin: 48px 0 0;
   text-align: left;
-  width: 90vw;
+  width: 100%;
 }
 
 /* ------------------------------------------- */
-/* MESSAGES */
+/* MESSAGES CONTAINER */
 .index__message-list {
   flex: 1 1 auto;
   margin: 0;
   overflow: auto;
   padding: 0;
-  width: 80vw;
+  width: 100%;
 }
 
+/* ------------------------------------------- */
+/* MESSAGE ITEM */
 .index__message-item {
-  display: flex;
-  flex-flow: row;
-  padding: 0;
-  margin: 0;
+  background-color: #D9D9D9;
+  border-color: white;
+  border-radius: 12px;
+  border-style: solid;
+  border-width: 1px;
+  color: black;
+  column-gap: 12px;
+  display: grid;
+  margin: 12px 0 0;
+  padding: 8px 12px;
 }
 
 .index__message-item-content {
+  margin: 0;
+  min-height: 22px;
+  word-break: break-word;
+}
+
+.index__message-item-divisor {
+  margin: 8px 0;
+  width: 100%;
+}
+
+.index__message-item-footer {
+  align-items: center;
+  column-gap: 8px;
+  display: flex;
+  flex-flow: row;
+}
+
+.index__message-item-footer-button {
+  color: red;
+  flex: 0 1 auto;
+  height: 22px;
+  width: 22px;
+}
+
+.index__message-item-footer-counter {
   flex: 1 1 auto;
 }
 
-.index__message-item-button {
-  flex: 0 1 auto;
-}
-
-.index__message-item-text {
+.index__message-item-footer-date {
   flex: 0 1 auto;
 }
