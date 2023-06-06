@@ -48,7 +48,6 @@ body {
   height: 100%;
   justify-content: center;
   margin: var(--unit-0000);
-  overflow: hidden;
   width: 100%;
 }
 
