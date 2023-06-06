@@ -49,7 +49,6 @@ body {
   justify-content: center;
   margin: var(--unit-0000);
   width: 100%;
-  -webkit-overflow-scrolling: touch;  
 }
 
 #root {
@@ -153,6 +152,7 @@ svg {
   overflow: auto;
   padding: var(--unit-0000);
   width: 100%;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ------------------------------------------- */
