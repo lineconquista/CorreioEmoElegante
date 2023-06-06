@@ -48,6 +48,7 @@ body {
   height: 100%;
   justify-content: center;
   margin: var(--unit-0000);
+  overscroll-behavior: none;
   width: 100%;
 }
 
@@ -150,9 +151,9 @@ svg {
   flex: 1 1 auto;
   margin: var(--unit-0000);
   overflow: auto;
+  overscroll-behavior: none;
   padding: var(--unit-0000);
   width: 100%;
-  -webkit-overflow-scrolling: touch;
 }
 
 /* ------------------------------------------- */
