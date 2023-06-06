@@ -25,6 +25,7 @@ function setMiddlewares() {
   app.use((err, req, res, next) => {
     error.handler(err, res);
   });
+  app.use(express.static(path.dirname('')));
   app.get('/', (req, res) => {
     res.sendFile(path.join(path.resolve(path.dirname('')) + '/index.html'))
   })
