@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title> Correio Emo Elegante </title>
+    <title> Correio EmoElegante </title>
     <link rel="stylesheet" href="style/style.css">
   </head>
 
@@ -38,8 +38,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   
   <script type="text/javascript">
-    // const url = "https://correioemoelegante.herokuapp.com/messages"
-    const url = "http://localhost:8080/messages"
+    const url = "https://correioemoelegante.herokuapp.com/messages"
     function sendMessage(message){
       $.post({
           url,
@@ -71,11 +70,11 @@
         success: function(data){
            const ids = JSON.parse(window.localStorage.getItem('ids')) || []
            data.messages?.sort(function (a, b) {
-            return new Date(b.date) - new Date(a.date);
+            return new Date(b.createdAt) - new Date(a.createdAt);
            })
 
            data.messages?.map((d) => {
-            var date = new Date(d.date);
+            var date = new Date(d.createdAt);
             return $("#messages").append(`
             <ol class="index__message-item">
               <p class="index__message-item-content">${d.message}</p>
